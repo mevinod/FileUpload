@@ -1,10 +1,9 @@
 <?php
-$connection = mysqli_connect('localhost','root','');
+$connection = mysqli_connect('localhost', 'root', '');
 if (!$connection){
-	die("Database connection failed" . mysqli_error($connection));
+    die("Database Connection Failed" . mysqli_error($connection));
 }
-$db=mysql_select_db($connection, 'uploads');
-
-if(!$db){
-	die("Schema selection error" . mysql_error($connection));
+$select_db = mysqli_select_db($connection, 'cc');
+if (!$select_db){
+    die("Database Selection Failed" . mysqli_error($connection));
 }
