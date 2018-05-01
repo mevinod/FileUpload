@@ -1,5 +1,5 @@
 <?php
-require_once('connect.php');
+require_once('dbconfig.php');
 if(isset($_GET) & !empty($_GET)){
 	$id = $_GET['id'];
 	$sql = "SELECT * FROM `upload` WHERE id=$id";
