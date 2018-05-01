@@ -1,46 +1,44 @@
-<?php 
-require_once('connect.php');
-$sql = "SELECT * FROM `upload`";
-$res = mysqli_query($connection, $sql);
-
-
+<?php
+include_once 'dbconfig.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Simple File Upload System in PHP & MySQL</title>
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<title>File Uploading With PHP and MySql</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<table class="table">
-			<tr>
-				<th>S.No</th>
-				<th>Name</th>
-				<th>Size</th>
-				<th>Type</th>
-				<th>Location</th>
-				<th>Delete</th>
-			</tr>
-			<?php 
-				while ($r = mysqli_fetch_assoc($res)) {
-			?>
-			<tr>
-				<td><?php echo $r['id']; ?></td>
-				<td><?php echo $r['name']; ?></td>
-				<td><?php echo $r['size']; ?></td>
-				<td><?php echo $r['type']; ?></td>
-				<td><?php echo $r['location']; ?></td>
-				<td><a href="delete.php?id=<?php echo $r['id']; ?>">Delete</a></td>
-			</tr>
-			<?php } ?>
-		</table>
-	</div>
+<div id="header">
+<label>File Uploading With PHP and MySql</label>
+</div>
+<div id="body">
+	<table width="80%" border="1">
+    <tr>
+    <th colspan="4">your uploads...<label><a href="index.php">upload new files...</a></label></th>
+    </tr>
+    <tr>
+    <td>File Name</td>
+    <td>File Type</td>
+    <td>File Size(KB)</td>
+    <td>View</td>
+    </tr>
+    <?php
+	$sql="SELECT * FROM tbl_uploads order by id desc";
+	$result_set= mysqli_query($connection, $sql);
+	while ($row = mysqli_fetch_assoc($result_set)) 
+	{
+		?>
+        <tr>
+        <td><?php echo $row['file'] ?></td>
+        <td><?php echo $row['type'] ?></td>
+        <td><?php echo $row['size'] ?></td>
+        <td><a href="uploads/<?php echo $row['file'] ?>" target="_blank">view file</a></td>
+        </tr>
+        <?php
+	}
+	?>
+    </table>
+    
 </div>
 </body>
 </html>
